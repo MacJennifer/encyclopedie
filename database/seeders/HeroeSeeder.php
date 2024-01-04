@@ -18,16 +18,16 @@ class HeroeSeeder extends Seeder
         // Ajouter des exemples de super-héros
         Hero::create([
             'name' => 'Superman',
-            'image' => 'superman.jpg',
+            'image' => 'assets/images/superman.jpg',
             'gender' => 'Male',
             'race' => 'Kryptonian',
-            'description' => 'The Man of Steel'
+            'description' => 'Superman est surement le super-héros le plus connu au monde dans le sens où il a été un des précurseurs, toujours en activité aujourd’hui, et qu’il représente tout ce que peut être un super-héros, invulnérable avec de grands pouvoirs, luttant pour la veuve et l’orphelin et tentant de rendre le monde meilleur. Il atteint le rang d’icône culturel de nos jours. Superman apparaît pour la toute première fois en même temps que le premier numéro de Action Comics, le 30 juin 1938, mais est déjà créer depuis 1932 grâce à l’écrivain américain Jerry Siegel et au dessinateur canadien Joe Shuster. Le super-homme aura très vite beaucoup de succès et apparaitra dans les journaux, à la radio, à la télévision, dans les jeux vidéo, faisant de lui le super-héros de référence mais surtout permettant d’installer le « genre » comic book dans la conscience populaire et de donner vie à tous les personnages qui suivront.'
 
         ]);
 
         Hero::create([
             'name' => 'Batman',
-            'image' => 'batman.jpg',
+            'image' => 'assets/images/batman.jpg',
             'gender' => 'Male',
             'race' => 'Human',
             'description' => 'The Dark Knight'
@@ -35,7 +35,7 @@ class HeroeSeeder extends Seeder
 
         Hero::create([
             'name' => 'Catwoman',
-            'image' => 'catwoman.jpg',
+            'image' => 'assets/images/catwoman.jpg',
             'gender' => 'Female',
             'race' => 'Human',
             'description' => 'The Feline Fatale'
@@ -43,7 +43,7 @@ class HeroeSeeder extends Seeder
 
         Hero::create([
             'name' => 'Flash',
-            'image' => 'flash.jpg',
+            'image' => 'assets/images/flash.jpg',
             'gender' => 'Male',
             'race' => 'Metahuman',
             'description' => 'The Fastest Man Alive'

@@ -24,7 +24,18 @@ class UserSeeder extends Seeder
             'email' =>'admin@gmail.com',
             'email_verified_at' =>now(),
             'remember_token' => Str::random(10),
+            'role_id' => 2
+        ]);
+        User::create([
+
+            'name' => 'utilisateur',
+            'password' => hash::make('14789632'),
+            'email' =>'utilisateur@gmail.com',
+            'email_verified_at' =>now(),
+            'remember_token' => Str::random(10),
             'role_id' => 1
         ]);
+
+
     }
 }
