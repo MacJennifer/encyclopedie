@@ -18,7 +18,7 @@
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Image du héro:</label>
-                    <input type="file" name="new_image" value="{{ $hero->image }}" class="form-control">
+                    <input type="file" name="image" value="{{ $hero->image }}" class="form-control">
                 </div>
 
                 <div class="mb-3">

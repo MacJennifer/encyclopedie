@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hero;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -57,20 +58,18 @@ class AdminController extends Controller
             'description'=> 'required'
 
         ]);
-
         $filename = "";
-            if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
+          $filenameWithExt = $request->file('image')->getClientOriginalName();
+          $filenameWithExt = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('image')->getClientOriginalExtension();
 
-                $filenameWithExt = $request->file('image')->getClientOriginalName();
-                $filenameWithExt = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $filename = $filenameWithExt. '_' .time().'.'.$extension;
 
-                $extension = $request->file('image')->getClientOriginalExtension();
-
-                $filename = $filenameWithExt. '_' .time().'.'.$extension;
-                $request->file('image')->storeAs('public/uploads', $filename);
-                } else {
-                $filename = Null;
-                }
+          $request->file('image')->storeAs('public/uploads', $filename);
+        } else {
+          $filename = Null;
+        }
 
        hero::create([
                 'name' => $request->name,
@@ -83,7 +82,7 @@ class AdminController extends Controller
 
         // Redirigez avec un message de succès
         return redirect()->route('admin.dashboard')->with('hero-success', 'Héros créé avec succès');
-    }
+}
 
 
     /**
@@ -114,16 +113,25 @@ class AdminController extends Controller
     {
         $hero = Hero::findOrFail($id);
         $hero->name = $request->input('name');
-        $hero->image = $request->input('image');
+        // $hero->image = $request->input('image');
         $hero->description = $request->input('description');
 
-        if ($request->hasFile('new_image')) {
-            // Téléchargez la nouvelle image et mettez à jour le champ image
-            $imagePath = $request->file('new_image')->store('public/uploads');
-            $hero->image = $imagePath;
+        if ($request->hasFile('image')) {
+            // Delete the old image file (optional)
+            // Storage::delete($hero->image);
+
+            // Store the new image file and get its path
+            $imagePath = $request->file('image')->store('uploads', 'public');
+
+            $imageName = basename($imagePath);
+
+            // Update the hero's image field with the new path
+            $hero->image = $imageName;
         }
 
+
         $hero->save();
+
 
 
         return redirect()->route('admin.dashboard')->with('hero-success', 'Héro mis à jour avec succès');
