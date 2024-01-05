@@ -57,3 +57,7 @@ Route::get('/admin/create', [AdminController::class, 'createHero'])->name('admin
 
 Route::post('/admin/storeHero', [AdminController::class, 'storeHero'])->name('admin.storeHero');
 
+Route::get('/admin/storeHero', [AdminController::class, 'storeHero'])->name('admin.storeHero');
+
+
+

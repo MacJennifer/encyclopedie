@@ -10,7 +10,8 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <a href="{{ route('heroes.show', $hero->id) }}">
-                        <img src="{{ $hero->image }}" class="card-img-top img-fluid" alt="{{ $hero->name }}">
+                        <img src="{{ asset('storage/uploads/' . $hero->image) }}" class="card-img-top img-fluid" alt="{{ $hero->name }}">
+
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ $hero->name }}</h5>
@@ -19,9 +20,6 @@
             </div>
         @endforeach
     </div>
-
-
-
 
     </div>
 </div>

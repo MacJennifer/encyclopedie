@@ -51,16 +51,30 @@ class AdminController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'image'=> 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'gender'=> 'required',
             'race'=> 'required',
             'description'=> 'required'
 
         ]);
 
+        $filename = "";
+            if ($request->hasFile('image')) {
+
+                $filenameWithExt = $request->file('image')->getClientOriginalName();
+                $filenameWithExt = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+                $extension = $request->file('image')->getClientOriginalExtension();
+
+                $filename = $filenameWithExt. '_' .time().'.'.$extension;
+                $request->file('image')->storeAs('public/uploads', $filename);
+                } else {
+                $filename = Null;
+                }
+
        hero::create([
                 'name' => $request->name,
-                'image' => $request->image,
+                'image' => $filename,
                 'gender' => $request->gender,
                 'race' => $request->race,
                 'description' => $request->description
@@ -102,6 +116,12 @@ class AdminController extends Controller
         $hero->name = $request->input('name');
         $hero->image = $request->input('image');
         $hero->description = $request->input('description');
+
+        if ($request->hasFile('new_image')) {
+            // Téléchargez la nouvelle image et mettez à jour le champ image
+            $imagePath = $request->file('new_image')->store('public/uploads');
+            $hero->image = $imagePath;
+        }
 
         $hero->save();
 

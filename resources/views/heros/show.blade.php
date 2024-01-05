@@ -7,7 +7,8 @@
     <h2>Détails du Super-héros</h2>
 
     <div class="card">
-        <img src="{{ asset($hero->image) }}" class="card-img-top custom-image" alt="{{ $hero->name }}">
+        <img src="{{ asset('storage/uploads/' . $hero->image) }}" class="card-img-top img-fluid" alt="{{ $hero->name }}">
+
         <div class="card-body">
             <h5 class="card-title">{{ $hero->name }}</h5>
             <p class="card-text">{{ $hero->description }}</p>

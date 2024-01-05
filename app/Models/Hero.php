@@ -14,8 +14,8 @@ class Hero extends Model
         'image',
         'gender',
         'race',
-        'description',
-        // Ajoutez d'autres colonnes si nécessaire
+        'description'
+
     ];
 
     public function skill()
