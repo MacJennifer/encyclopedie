@@ -2,11 +2,14 @@
 
 @section('content')
 
-
-
-<div class="card mx-auto mt-5" style="max-width: 400px;">
+<div class="container">
+<a href="{{ route('admin.dashboard') }}">
+    <img src="{{ asset('assets/images/logoHero.png')}}" alt="accueil"  style="width: 100px; height: auto;">
+ </a>
+<h1 class="titleH2">Ajouter un monstre</h1>
+<div class="card mx-auto mt-5" style="max-width: 1500px;">
     <div class="card-body">
-        <h5 class="card-title text-center mb-4">Créer un héro</h5>
+
 
         <form action="{{ route('admin.storeHero') }}"  method="post" enctype="multipart/form-data">
             @csrf
@@ -40,5 +43,5 @@
         </form>
     </div>
 </div>
-
+</div>
 @endsection

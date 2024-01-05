@@ -1,10 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+     <a href="{{ route('admin.dashboard') }}">
+        <img src="{{ asset('assets/images/logoHero.png')}}" alt="accueil"  style="width: 100px; height: auto;">
+     </a>
+     <h1 class="titleH2">Modifier un monstre</h1>
+
     <div class="card">
         <div class="card-header">
-            <h2 class="mb-0">Modifier un héro</h2>
+
         </div>
         <div class="card-body">
             <form action="{{ route('admin.update', $hero->id) }}" method="post"  enctype="multipart/form-data">
