@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('image')->nullable();
-            $table->string('gender');
-            $table->string('race');
-            $table->text('description');
+            $table->string('gender')->nullable();
+            $table->string('race')->nullable();
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('skill_id')->nullable();
             $table->timestamps();
 

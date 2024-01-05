@@ -41,13 +41,19 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
-Route::get('/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-
+Route::get('/admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+Route::put('/admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+Route::put('/admin/heroes/{id}', [AdminController::class, 'update'])->name('admin.update');
 
 
 Route::delete('/admin/users/{id}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
 
 Route::delete('/admin/heroes/{id}', [AdminController::class, 'destroyHeroes'])->name('admin.destroyHeroes');
 
+// Route::get('/admin/create',  [AdminController::class, 'storeHero'])->name('admin.storeHero');
 
+
+Route::get('/admin/create', [AdminController::class, 'createHero'])->name('admin.create');
+
+Route::post('/admin/storeHero', [AdminController::class, 'storeHero'])->name('admin.storeHero');
 

@@ -34,6 +34,11 @@ class AdminController extends Controller
         //
     }
 
+    public function createHero()
+    {
+        return view('admin.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -41,6 +46,31 @@ class AdminController extends Controller
     {
         //
     }
+    public function storeHero(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image'=> 'required',
+            'gender'=> 'required',
+            'race'=> 'required',
+            'description'=> 'required'
+
+        ]);
+
+       hero::create([
+                'name' => $request->name,
+                'image' => $request->image,
+                'gender' => $request->gender,
+                'race' => $request->race,
+                'description' => $request->description
+
+       ]);
+
+        // Redirigez avec un message de succès
+        return redirect()->route('admin.dashboard')->with('hero-success', 'Héros créé avec succès');
+    }
+
 
     /**
      * Display the specified resource.
@@ -53,27 +83,30 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
-        // Récupérez l'utilisateur à partir de l'ID
-    $user = User::find($id);
 
-    // Vérifiez si l'utilisateur existe
-    if (!$user) {
-        // Gérez le cas où l'utilisateur n'est pas trouvé, par exemple, redirigez vers une page d'erreur.
-        return redirect()->route('admin.dashboard')->with('error', 'Utilisateur non trouvé');
+        $hero = Hero::findOrFail($id);
+
+
+        return view('admin.edit', compact('hero'));
     }
 
-    // Passez l'utilisateur à la vue
-    return view('admin.edit', compact('user'));
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $hero = Hero::findOrFail($id);
+        $hero->name = $request->input('name');
+        $hero->image = $request->input('image');
+        $hero->description = $request->input('description');
+
+        $hero->save();
+
+
+        return redirect()->route('admin.dashboard')->with('hero-success', 'Héro mis à jour avec succès');
     }
 
     /**
