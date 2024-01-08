@@ -118,14 +118,14 @@ class AdminController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete the old image file (optional)
-            // Storage::delete($hero->image);
+            Storage::delete($hero->image);
 
-            // Store the new image file and get its path
+
             $imagePath = $request->file('image')->store('uploads', 'public');
 
             $imageName = basename($imagePath);
 
-            // Update the hero's image field with the new path
+
             $hero->image = $imageName;
         }
 
